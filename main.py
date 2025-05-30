@@ -1,11 +1,12 @@
 import random, os
+from ascii import ascii
 
 class Pokemon:
     def __init__(self, name):
         self.name = name
-        self.health = random.randint(20, 30)  # Health remains an integer
-        self.attack = random.uniform(1.5, 5)  # Attack is now a float
-        self.defense = random.uniform(0.75, 1)  # Defense is now a float
+        self.health = random.randint(20, 30)
+        self.attack = random.uniform(1.5, 5)
+        self.defense = random.uniform(0.75, 1)
 
     def check_stats(self):
         print(f"Name: {self.name}\nHP: {self.health}\nATK: {self.attack:.2f}\nDEF: {self.defense:.2f}")
@@ -22,8 +23,14 @@ class Magic(Pokemon):
         self.special = random.uniform(1, 1.5)
 
     def attack_target(self, target):
-        damage = self.attack * self.special - target.defense
-        damage = max(damage, 0)  # Ensure damage is not negative
+        damage = self.attack - target.defense
+        damage = max(damage, 0)
+
+        random_event = random.randint(1, 5)
+        if random_event == 3:
+            self.health += self.special
+            print(f"{self.name} casts a healing spell and recovers {self.special:.2f} HP!")
+
         target.health -= damage
         print(f"{self.name} attacks {target.name} for {damage:.2f} damage!")
         if target.health < 0:
@@ -35,12 +42,16 @@ class Fighter(Pokemon):
         self.special = random.uniform(1, 1.5)
 
     def attack_target(self, target):
-        damage = self.attack * self.special - target.defense
-        damage = max(damage, 0)  # Ensure damage is not negative
+        damage = self.attack ** self.special - target.defense
+        damage = max(damage, 0)
         target.health -= damage
         print(f"{self.name} attacks {target.name} for {damage:.2f} damage!")
         if target.health < 0:
             target.health = 0
+
+print(ascii)
+print("Welcome to the Pokemon Battle Arena!")
+input("Press Enter to continue...")
 
 name1 = input("Enter the name for the magic Pokemon: ")
 name2 = input("Enter the name for the fighter Pokemon: ")
