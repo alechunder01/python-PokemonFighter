@@ -96,3 +96,5 @@ if poke1.health > poke2.health:
     print(f"{poke1.name} wins!")
 elif poke2.health > poke1.health:
     print(f"{poke2.name} wins!")
+else:
+    print("It's a tie!")
